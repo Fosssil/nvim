@@ -18,7 +18,16 @@ M.ui = {
   statusline = {
     theme = "vscode_colored",
     separator_style = "round",
-    order = { "mode", "file", "git", "%=", "cursor", "diagnostics", "lsp_msg", "lsp", "cwd" },
+    order = { "mode", "file", "modified", "git", "%=", "cursor", "diagnostics", "lsp_msg", "lsp", "cwd" },
+    modules = {
+      modified = function()
+        local isModified = vim.bo.modified
+        if isModified then
+          return " [Modified]"
+        end
+        return ""
+      end
+    }
 
     -- telescope = { style = "bordered" },
     -- modules = {

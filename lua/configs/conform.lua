@@ -1,6 +1,8 @@
 local options = {
   formatters_by_ft = {
     assembly = { "asmfmt" },
+    ansible = { "prettier" },
+    yaml = { "prettier" },
     css = { "prettier" },
     c = { "clang_format" },
     html = { "prettier" },

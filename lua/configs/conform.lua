@@ -18,7 +18,7 @@ local options = {
   --   timeout_ms = 500,
   --   lsp_fallback = true,
   -- },
-  vim.keymap.set("n", "<leader>fd", vim.lsp.buf.format, { desc = "format documet" }),
+  -- vim.keymap.set("n", "<leader>fd", vim.lsp.buf.format, { desc = "format documet" }),
 }
 
 return options

@@ -7,6 +7,29 @@ local opts = { noremap = true, silent = true }
 -- Set leader key
 vim.g.mapleader = " "
 
+-- 🚫 Function to show reminder
+local function disable_arrow_notification()
+	vim.notify("Use hjkl! 🧭", vim.log.levels.WARN, { title = "Navigation Reminder" })
+end
+
+-- 🚫 Disable arrow keys in normal mode with reminder
+vim.keymap.set("n", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Normal mode)" })
+vim.keymap.set("n", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Normal mode)" })
+vim.keymap.set("n", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Normal mode)" })
+vim.keymap.set("n", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Normal mode)" })
+
+-- 🚫 Disable in insert mode
+vim.keymap.set("i", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Insert mode)" })
+vim.keymap.set("i", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Insert mode)" })
+vim.keymap.set("i", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Insert mode)" })
+vim.keymap.set("i", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Insert mode)" })
+
+-- 🚫 Disable in visual mode
+vim.keymap.set("v", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Visual mode)" })
+vim.keymap.set("v", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Visual mode)" })
+vim.keymap.set("v", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Visual mode)" })
+vim.keymap.set("v", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Visual mode)" })
+
 -- Basic keymaps
 map("n", "<leader>w", ":w<CR>", vim.tbl_extend("force", opts, { desc = "Save file" }))
 map("n", "<leader>q", ":q<CR>", vim.tbl_extend("force", opts, { desc = "Quit" }))
@@ -59,23 +82,23 @@ map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", vim.tbl_extend("force", 
 
 -- Lsp keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-    callback = function(ev)
-        local opts = { buffer = ev.buf }
-        -- Navigation and Action
-        vim.keymap.set("n", "cd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "ck", vim.lsp.buf.hover, opts)          -- Information
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- rename
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		local opts = { buffer = ev.buf }
+		-- Navigation and Action
+		vim.keymap.set("n", "cd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "ck", vim.lsp.buf.hover, opts) -- Information
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- rename
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
-        -- Diagnostics
-        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+		-- Diagnostics
+		vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
-        -- Formatting
-        map("n", "<leader>fd", function()
-            require("conform").format({ async = true, lsp_fallback = true })
-        end, vim.tbl_extend("force", opts, { desc = "Format Document" }))
-    end,
+		-- Formatting
+		map("n", "<leader>fd", function()
+			require("conform").format({ async = true, lsp_fallback = true })
+		end, vim.tbl_extend("force", opts, { desc = "Format Document" }))
+	end,
 })

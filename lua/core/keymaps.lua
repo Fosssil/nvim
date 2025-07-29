@@ -13,10 +13,10 @@ local function disable_arrow_notification()
 end
 
 -- 🚫 Disable arrow keys in normal mode with reminder
-vim.keymap.set("n", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Normal mode)" })
-vim.keymap.set("n", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Normal mode)" })
-vim.keymap.set("n", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Normal mode)" })
-vim.keymap.set("n", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Normal mode)" })
+-- vim.keymap.set("n", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Normal mode)" })
+-- vim.keymap.set("n", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Normal mode)" })
+-- vim.keymap.set("n", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Normal mode)" })
+-- vim.keymap.set("n", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Normal mode)" })
 
 -- 🚫 Disable in insert mode
 vim.keymap.set("i", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Insert mode)" })

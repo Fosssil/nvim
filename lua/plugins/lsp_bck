@@ -42,25 +42,20 @@ return {
 			local servers = {
 				bashls = {},
 				cssls = {
-					settings = {
-						css = {
-							validate = false,
-							lint = {
-								unknownAtRules = "ignore",
-							},
+					css = {
+						lint = {
+							unknownAtRules = "ignore", -- Example: Ignore unknown @rules
 						},
 					},
 				},
-
-				html = { settings = { html = { validate = { scripts = false, styles = false } } } },
+				html = {},
 				jsonls = {},
 				hyprls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
 							runtime = { version = "LuaJIT" },
-							-- diagnostics = { globals = { "vim" } },
-							diagnostics = { enable = false },
+							diagnostics = { globals = { "vim" } },
 							workspace = {
 								library = vim.api.nvim_get_runtime_file("", true),
 								checkThirdParty = false,

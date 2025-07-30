@@ -19,14 +19,12 @@ return {
 
 			-- Global diagnostic config
 			vim.diagnostic.config({
-				virtual_text = false,
+				-- virtual_text = true,
 				signs = true,
 				underline = true,
 				update_in_insert = false,
 				severity_sort = true,
-				float = {
-					border = "rounded",
-				},
+				float = { border = "rounded" },
 			})
 
 			-- Faster CursorHold
@@ -39,25 +37,13 @@ return {
 				end,
 			})
 
-			-- Clear diagnostics before linting to avoid duplicates
-			local function clear_and_lint()
-				vim.diagnostic.reset(nil, 0) -- Clear diagnostics for current buffer
-				lint.try_lint()
-			end
-
-			-- Trigger linting on save
-			-- vim.api.nvim_create_autocmd("BufWritePost", {
-			-- callback = function()
-			-- if not vim.g.disable_linting then
-			-- lint.try_lint()
-			-- end
-			-- end,
-			-- })
-			--
 			-- Trigger linting on save
 			vim.api.nvim_create_autocmd("BufWritePost", {
-				group = vim.api.nvim_create_augroup("Linting", { clear = true }),
-				callback = clear_and_lint,
+				callback = function()
+					if not vim.g.disable_linting then
+						lint.try_lint()
+					end
+				end,
 			})
 
 			-- Manual lint command

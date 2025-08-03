@@ -20,6 +20,8 @@ return {
 					"lua_ls",
 					"jsonls",
 					"hyprls",
+					"json-lsp",
+					"jsonlint",
 				}, -- Install these automatically
 				automatic_installation = true,
 			})
@@ -53,7 +55,7 @@ return {
 				},
 
 				html = { settings = { html = { validate = { scripts = false, styles = false } } } },
-				jsonls = {},
+				jsonls = { settings = { json = { validate = false } } },
 				hyprls = {},
 				lua_ls = {
 					settings = {

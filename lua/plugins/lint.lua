@@ -21,23 +21,23 @@ return {
 			vim.diagnostic.config({
 				virtual_text = false,
 				signs = true,
-				underline = true,
+				underline = false,
 				update_in_insert = false,
 				severity_sort = true,
-				float = {
-					border = "rounded",
-				},
+				--				float = {
+				--					border = "rounded",
+				--				},
 			})
 
 			-- Faster CursorHold
 			vim.o.updatetime = 250
 
 			-- Float window on CursorHold
-			vim.api.nvim_create_autocmd("CursorHold", {
-				callback = function()
-					vim.diagnostic.open_float(nil, { focus = false })
-				end,
-			})
+			--			vim.api.nvim_create_autocmd("CursorHold", {
+			--				callback = function()
+			--					vim.diagnostic.open_float(nil, { focus = false })
+			--				end,
+			--			})
 
 			-- Clear diagnostics before linting to avoid duplicates
 			local function clear_and_lint()
@@ -45,15 +45,6 @@ return {
 				lint.try_lint()
 			end
 
-			-- Trigger linting on save
-			-- vim.api.nvim_create_autocmd("BufWritePost", {
-			-- callback = function()
-			-- if not vim.g.disable_linting then
-			-- lint.try_lint()
-			-- end
-			-- end,
-			-- })
-			--
 			-- Trigger linting on save
 			vim.api.nvim_create_autocmd("BufWritePost", {
 				group = vim.api.nvim_create_augroup("Linting", { clear = true }),

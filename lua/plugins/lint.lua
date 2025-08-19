@@ -15,29 +15,30 @@ return {
 				html = { "htmlhint" },
 				css = { "stylelint" },
 				json = { "jsonlint" },
+				markdown = { "markdownlint-cli2" },
 			}
 
 			-- Global diagnostic config
 			vim.diagnostic.config({
 				virtual_text = false,
 				signs = true,
-				underline = false,
-				update_in_insert = false,
+				underline = true,
+				update_in_insert = true,
 				severity_sort = true,
-				--				float = {
-				--					border = "rounded",
-				--				},
+				float = {
+					border = "rounded",
+				},
 			})
 
 			-- Faster CursorHold
 			vim.o.updatetime = 250
 
 			-- Float window on CursorHold
-			--			vim.api.nvim_create_autocmd("CursorHold", {
-			--				callback = function()
-			--					vim.diagnostic.open_float(nil, { focus = false })
-			--				end,
-			--			})
+			vim.api.nvim_create_autocmd("CursorHold", {
+				callback = function()
+					vim.diagnostic.open_float(nil, { focus = false })
+				end,
+			})
 
 			-- Clear diagnostics before linting to avoid duplicates
 			local function clear_and_lint()

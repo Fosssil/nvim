@@ -20,8 +20,8 @@ return {
 					"lua_ls",
 					"jsonls",
 					"hyprls",
-					"json-lsp",
-					"jsonlint",
+					-- "json-lsp",
+					"marksman",
 				}, -- Install these automatically
 				automatic_installation = true,
 			})
@@ -43,6 +43,7 @@ return {
 			-- Basic LSP servers setup
 			local servers = {
 				bashls = {},
+				-- marksman = {},
 				cssls = {
 					settings = {
 						css = {

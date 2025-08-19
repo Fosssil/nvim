@@ -3,7 +3,7 @@ local opt = vim.opt
 
 -- Basic UI settings
 opt.shortmess:append("I") -- Skip intro
-opt.mouse = "a" -- Mouse support is 'on'
+opt.mouse = "" -- Mouse support is 'on'
 opt.number = true -- Show line numbers
 opt.relativenumber = true -- Relative line numbers
 opt.termguicolors = true -- Enable 24-bit RGB colors
@@ -13,7 +13,7 @@ opt.laststatus = 3 -- Global statusline
 opt.linebreak = true -- Prevent mid-word splitting
 opt.cmdheight = 0 -- New cmdline popup UX
 opt.list = false -- Shows invisible characters
-opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- Tabs, trailing spaces
+-- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- Tabs, trailing spaces
 opt.formatoptions:remove({ "c", "r", "o" }) -- Don't auto comment new lines
 opt.scrolljump = 5 -- Smooth scroll
 -- opt.colorcolumn = "80"                      -- Highlights column 80
@@ -33,9 +33,10 @@ opt.modeline = true -- Special comments in files that set buffer-local options
 opt.completeopt = { "menu", "menuone", "noselect" } -- Completion menu behavior
 
 -- Indentation
-opt.tabstop = 2 -- 2 spaces for tabs
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- Use spaces instead of tabs
+opt.tabstop = 4 -- 2 spaces for tabs
+opt.softtabstop = 4
+opt.shiftwidth = 4 -- 2 spaces for indent width
+opt.expandtab = false -- Use spaces instead of tabs
 opt.autoindent = true -- Autoindent
 opt.smartindent = true -- Auto-indent new lines
 opt.breakindent = true -- Wrap indent visually

@@ -3,7 +3,7 @@ local opt = vim.opt
 
 -- Basic UI settings
 opt.shortmess:append("I") -- Skip intro
-opt.mouse = "" -- Mouse support is 'on'
+opt.mouse = "n" -- Mouse support is 'on'
 opt.number = true -- Show line numbers
 opt.relativenumber = true -- Relative line numbers
 opt.termguicolors = true -- Enable 24-bit RGB colors

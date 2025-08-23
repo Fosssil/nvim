@@ -8,12 +8,13 @@ return {
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					sh = { "shfmt" },
-					bash = { "shfmt" },
-					html = { "prettier" },
 					css = { "prettier" },
 					json = { "prettier" },
+					html = { "prettier" },
 					markdown = { "prettier" },
+					sh = { "shfmt", "beautysh" },
+					zsh = { "beautysh", "shfmt" },
+					bash = { "shfmt", "beautysh" },
 				},
 				format_on_save = function(bufnr)
 					if vim.g.disable_autoformat then

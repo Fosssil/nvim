@@ -58,6 +58,7 @@ return {
 				html = { settings = { html = { validate = { scripts = false, styles = false } } } },
 				jsonls = { settings = { json = { validate = false } } },
 				hyprls = {},
+				marksman = {},
 				lua_ls = {
 					settings = {
 						Lua = {

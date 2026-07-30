@@ -51,37 +51,26 @@ return {
 						mode = 0,
 
 						max_length = function()
-							return math.floor(vim.o.columns * 0.45)
+							return math.floor(vim.o.columns * 0.40)
 						end,
 
 						use_mode_colors = true,
 
 						symbols = {
-							modified = " [✱]",
+							modified = " ✱",
 							alternate_file = "#",
 							directory = "",
 						},
 					},
 				},
 
-				lualine_c = {
-					--[[ {
-						"branch",
-						icon = "",
-					}, ]]
+				lualine_c = {},
 
-					{
-						"diff",
-						symbols = {
-							added = "+",
-							modified = "✱",
-							removed = "-",
-						},
-						colored = true,
-						cond = function()
-							return vim.b.gitsigns_head ~= nil
-						end,
-					},
+				------------------------------------------------------------
+				-- Right
+				------------------------------------------------------------
+
+				lualine_x = {
 
 					{
 						"diagnostics",
@@ -95,12 +84,22 @@ return {
 							hint = " ",
 						},
 					},
+
+					{
+						"diff",
+						symbols = {
+							added = "+ ",
+							modified = "✱ ",
+							removed = "- ",
+						},
+						colored = true,
+						cond = function()
+							return vim.b.gitsigns_head ~= nil
+						end,
+					},
 				},
 
-				------------------------------------------------------------
-				-- Right
-				------------------------------------------------------------
-				lualine_x = {
+				lualine_y = {
 					function()
 						local clients = vim.lsp.get_clients({ bufnr = 0 })
 
@@ -110,15 +109,6 @@ return {
 
 						return " " .. clients[1].name
 					end,
-
-					{
-						"filetype",
-						icon_only = false,
-					},
-				},
-
-				lualine_y = {
-					"progress",
 				},
 
 				lualine_z = {

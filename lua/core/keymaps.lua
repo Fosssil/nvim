@@ -1,94 +1,128 @@
 -- ~/.config/nvim/lua/core/keymaps.lua
+
 local map = vim.keymap.set
 
--- Default options for keymaps
-local opts = { noremap = true, silent = true }
+-- Default options
+local defaults = {
+	noremap = true,
+	silent = true,
+}
 
--- Set leader key
-vim.g.mapleader = " "
-
--- 🚫 Function to show reminder
-local function disable_arrow_notification()
-	vim.notify("Use hjkl! 🧭", vim.log.levels.WARN, { title = "Navigation Reminder" })
+-- Helper
+local function key(mode, lhs, rhs, desc, extra)
+	map(mode, lhs, rhs, vim.tbl_extend("force", defaults, { desc = desc }, extra or {}))
 end
 
--- 🚫 Disable arrow keys in normal mode with reminder
-vim.keymap.set("n", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Normal mode)" })
-vim.keymap.set("n", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Normal mode)" })
-vim.keymap.set("n", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Normal mode)" })
-vim.keymap.set("n", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Normal mode)" })
+--------------------------------------------------
+-- Arrow Keys
+--------------------------------------------------
 
--- 🚫 Disable in insert mode
--- vim.keymap.set("i", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Insert mode)" })
--- vim.keymap.set("i", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Insert mode)" })
--- vim.keymap.set("i", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Insert mode)" })
--- vim.keymap.set("i", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Insert mode)" })
+--[[ local function disable_arrow_notification()
+	vim.notify("Arrow keys are disabled.", vim.log.levels.WARN, { title = "Navigation Reminder" })
+end
 
--- 🚫 Disable in visual mode
-vim.keymap.set("v", "<Up>", disable_arrow_notification, { desc = "Disable Up Arrow (Visual mode)" })
-vim.keymap.set("v", "<Down>", disable_arrow_notification, { desc = "Disable Down Arrow (Visual mode)" })
-vim.keymap.set("v", "<Left>", disable_arrow_notification, { desc = "Disable Left Arrow (Visual mode)" })
-vim.keymap.set("v", "<Right>", disable_arrow_notification, { desc = "Disable Right Arrow (Visual mode)" })
+key("n", "<Up>", disable_arrow_notification, "Disable Up Arrow")
+key("n", "<Down>", disable_arrow_notification, "Disable Down Arrow")
+key("n", "<Left>", disable_arrow_notification, "Disable Left Arrow")
+key("n", "<Right>", disable_arrow_notification, "Disable Right Arrow")
 
--- Basic keymaps
-map("n", "<leader>w", ":w<CR>", vim.tbl_extend("force", opts, { desc = "Save file" }))
-map("n", "<leader>q", ":q<CR>", vim.tbl_extend("force", opts, { desc = "Quit" }))
-map("n", "<leader>e", ":e<CR>", vim.tbl_extend("force", opts, { desc = "Reload file" }))
+-- key("i", "<Up>", disable_arrow_notification, "Disable Up Arrow")
+-- key("i", "<Down>", disable_arrow_notification, "Disable Down Arrow")
+-- key("i", "<Left>", disable_arrow_notification, "Disable Left Arrow")
+-- key("i", "<Right>", disable_arrow_notification, "Disable Right Arrow")
 
---  Better paste (without overwriting clipboard)
-map("v", "p", '"_dP', vim.tbl_extend("force", opts, { desc = "Paste without yanking" }))
+key("v", "<Up>", disable_arrow_notification, "Disable Up Arrow")
+key("v", "<Down>", disable_arrow_notification, "Disable Down Arrow")
+key("v", "<Left>", disable_arrow_notification, "Disable Left Arrow")
+key("v", "<Right>", disable_arrow_notification, "Disable Right Arrow") ]]
 
---  Clear search highlights
-map("n", "<leader>h", ":noh<CR>", vim.tbl_extend("force", opts, { desc = "Clear search highlights" }))
+-- Disable arrow keys in Normal, Insert and Visual modes
+for _, key in ipairs({ "<Up>", "<Down>", "<Left>", "<Right>" }) do
+	vim.keymap.set({ "n", "i", "v" }, key, "<Nop>", {
+		silent = true,
+		desc = "Disable arrow key",
+	})
+end
+--------------------------------------------------
+-- General
+--------------------------------------------------
 
--- Buffer switching
-map("n", "<leader>n", ":bnext<CR>", vim.tbl_extend("force", opts, { desc = "Next Buffer" }))
-map("n", "<leader>p", ":bprev<CR>", vim.tbl_extend("force", opts, { desc = "Previous Buffer" }))
+key("n", "<leader>w", "<cmd>w<CR>", "Save File")
+key("n", "<leader>q", "<cmd>q<CR>", "Quit")
+-- key("n", "<leader>e", "<cmd>e<CR>", "Reload File")
 
--- Window navigation
-map("n", "<C-h>", "<C-w>h", vim.tbl_extend("force", opts, { desc = "Left Window" }))
-map("n", "<C-j>", "<C-w>j", vim.tbl_extend("force", opts, { desc = "Below Window" }))
-map("n", "<C-k>", "<C-w>k", vim.tbl_extend("force", opts, { desc = "Above Window" }))
-map("n", "<C-l>", "<C-w>l", vim.tbl_extend("force", opts, { desc = "Right Window" }))
+--------------------------------------------------
+-- Editing
+--------------------------------------------------
 
--- Move lines
-map("n", "<A-j>", ":m .+1<CR>==", vim.tbl_extend("force", opts, { desc = "Move line down" }))
-map("n", "<A-k>", ":m .-2<CR>==", vim.tbl_extend("force", opts, { desc = "Move line up" }))
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", vim.tbl_extend("force", opts, { desc = "Move selected lines down" }))
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", vim.tbl_extend("force", opts, { desc = "Move selected lines up" }))
+key("v", "p", '"_dP', "Paste Without Yanking")
 
--- Close buffer without quitting neovim
-map("n", "<leader>bd", ":bp | :bd #<CR>", vim.tbl_extend("force", opts, { desc = "Close buffer", silent = false }))
+key("n", "<leader>h", "<cmd>nohlsearch<CR>", "Clear Search Highlight")
 
--- Search navigation
-map("n", "n", "nzz", vim.tbl_extend("force", opts, { desc = "Next search, centered" }))
-map("n", "N", "Nzz", vim.tbl_extend("force", opts, { desc = "Previous search, centered" }))
+key("n", "<A-j>", ":m .+1<CR>==", "Move Line Down")
+key("n", "<A-k>", ":m .-2<CR>==", "Move Line Up")
 
--- Yank enhancement
-map({ "n", "v" }, "<leader>y", '"+y', vim.tbl_extend("force", opts, { desc = "Yank to clipboard" }))
+key("v", "<A-j>", ":m '>+1<CR>gv=gv", "Move Selected Lines Down")
+key("v", "<A-k>", ":m '<-2<CR>gv=gv", "Move Selected Lines Up")
 
--- Split Management
-map("n", "<leader>sv", ":vsplit<CR>", vim.tbl_extend("force", opts, { desc = "Vertical split" }))
-map("n", "<leader>sh", ":split<CR>", vim.tbl_extend("force", opts, { desc = "Horizontal split" }))
+key({ "n", "v" }, "<leader>y", '"+y', "Yank To Clipboard")
 
--- Telescope keymaps under <leader>f
--- map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", vim.tbl_extend("force", opts, { desc = "Find files" }))
-map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", vim.tbl_extend("force", opts, { desc = "Live grep" }))
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", vim.tbl_extend("force", opts, { desc = "Buffers" }))
-map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", vim.tbl_extend("force", opts, { desc = "Help tags" }))
-map("n", "<leader>ff", "<cmd>Telescope file_browser<cr>", vim.tbl_extend("force", opts, { desc = "File Browser" }))
--- map("n", "<leader>fu", "<cmd>Telescope undo<CR>", vim.tbl_extend("force", opts, { desc = "Undo tree" }))
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", vim.tbl_extend("force", opts, { desc = "Git status (diff)" }))
+--------------------------------------------------
+-- Search
+--------------------------------------------------
 
--- Lsp keymaps
+key("n", "n", "nzz", "Next Search Result")
+key("n", "N", "Nzz", "Previous Search Result")
+
+--------------------------------------------------
+-- Buffers
+--------------------------------------------------
+
+key("n", "<leader>n", "<cmd>bnext<CR>", "Next Buffer")
+key("n", "<leader>p", "<cmd>bprevious<CR>", "Previous Buffer")
+
+key("n", "<leader>bd", "<cmd>bp | bd #<CR>", "Close Buffer", { silent = false })
+
+--------------------------------------------------
+-- Windows
+--------------------------------------------------
+
+key("n", "<C-h>", "<C-w>h", "Focus Left Window")
+key("n", "<C-j>", "<C-w>j", "Focus Lower Window")
+key("n", "<C-k>", "<C-w>k", "Focus Upper Window")
+key("n", "<C-l>", "<C-w>l", "Focus Right Window")
+
+key("n", "<leader>sv", "<cmd>vsplit<CR>", "Vertical Split")
+key("n", "<leader>sh", "<cmd>split<CR>", "Horizontal Split")
+
+--------------------------------------------------
+-- Telescope (Temporary)
+-- Will move to telescope.lua later.
+--------------------------------------------------
+
+key("n", "<leader>ff", "<cmd>Telescope file_browser<CR>", "File Browser")
+key("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", "Live Grep")
+key("n", "<leader>fb", "<cmd>Telescope buffers<CR>", "Buffers")
+key("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", "Help Tags")
+key("n", "<leader>gt", "<cmd>Telescope git_status<CR>", "Git Status")
+
+--------------------------------------------------
+-- LSP
+-- Will move to lsp.lua later.
+--------------------------------------------------
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
-		-- Navigation and Action
+
+		-- Navigation
 		vim.keymap.set("n", "cd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "ck", vim.lsp.buf.hover, opts) -- Information
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- rename
+		vim.keymap.set("n", "ck", vim.lsp.buf.hover, opts)
+
+		-- Actions
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
 		-- Diagnostics
@@ -97,8 +131,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
 		-- Formatting
-		map("n", "<leader>fd", function()
-			require("conform").format({ async = true, lsp_fallback = true })
-		end, vim.tbl_extend("force", opts, { desc = "Format Document" }))
+		vim.keymap.set(
+			"n",
+			"<leader>fd",
+			function()
+				require("conform").format({
+					async = true,
+					lsp_fallback = true,
+				})
+			end,
+			vim.tbl_extend("force", opts, {
+				desc = "Format Document",
+			})
+		)
 	end,
 })

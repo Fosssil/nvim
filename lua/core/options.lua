@@ -3,25 +3,22 @@ local opt = vim.opt
 
 -- Basic UI settings
 opt.shortmess:append("I") -- Skip intro
-opt.mouse = "n" -- Mouse support is 'on'
+opt.mouse = "" -- Mouse support is 'on'
 opt.number = true -- Show line numbers
 opt.relativenumber = true -- Relative line numbers
 opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.cursorline = true -- Highlight cursorline
--- opt.cursorcolumn = true                               -- Highlight cursorcolumn
 opt.laststatus = 3 -- Global statusline
 opt.linebreak = true -- Prevent mid-word splitting
 opt.cmdheight = 0 -- New cmdline popup UX
 opt.list = false -- Shows invisible characters
--- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- Tabs, trailing spaces
 opt.formatoptions:remove({ "c", "r", "o" }) -- Don't auto comment new lines
-opt.scrolljump = 5 -- Smooth scroll
--- opt.colorcolumn = "80"                      -- Highlights column 80
 opt.errorbells = false -- Disable error bell
 opt.visualbell = false -- Disable visual bell
+opt.splitkeep = "screen"
 
 -- Behaviour
-opt.mousemodel = "extend" -- Better mouse behavior on selecting/scrolling
+opt.smoothscroll = true
 opt.inccommand = "split" -- Previews substitutions
 opt.clipboard = "unnamedplus" -- System clipboard sync
 opt.scrolloff = 8 -- Keep content visible '8' lines below and above
@@ -29,7 +26,6 @@ opt.undofile = true -- Persistent undo without swap clutter
 opt.swapfile = false -- Turn off swap file
 opt.signcolumn = "yes" -- vertical column to the left of the line numbers
 opt.confirm = true -- Confirm to save before exiting
-opt.modeline = true -- Special comments in files that set buffer-local options
 opt.completeopt = { "menu", "menuone", "noselect" } -- Completion menu behavior
 
 -- Indentation
@@ -57,3 +53,18 @@ opt.splitright = true -- Vertical splits to the right
 opt.updatetime = 250 -- Faster completion
 opt.timeoutlen = 300 -- Faster mapped sequences
 opt.lazyredraw = true -- Optimization for macros or fast edits
+
+-- Don't continue comments when opening a new line with 'o' or 'O'.
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		vim.opt_local.formatoptions:remove("o")
+	end,
+})
+
+-- Optional:
+-- opt.colorcolumn = "80" -- enable for projects with strict line-length limits.
+-- opt.modeline = true -- Special comments in files that set buffer-local options
+-- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- Tabs, trailing spaces
+-- opt.scrolljump = 5 -- Smooth scroll
+-- opt.cursorcolumn = true                               -- Highlight cursorcolumn
+-- opt.mousemodel = "extend" -- Better mouse behavior on selecting/scrolling

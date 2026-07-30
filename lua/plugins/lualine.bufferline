@@ -8,6 +8,22 @@ return {
 	},
 
 	config = function()
+		local function buffer_count()
+			local count = 0
+
+			for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+				if vim.bo[buf].buflisted then
+					count = count + 1
+				end
+			end
+
+			if count <= 1 then
+				return ""
+			end
+
+			return "󰓩 " .. count
+		end
+
 		require("lualine").setup({
 			options = {
 				theme = "catppuccin-nvim",
@@ -42,40 +58,29 @@ return {
 
 				lualine_b = {
 					{
-						"buffers",
-
-						show_filename_only = true,
-						hide_filename_extension = false,
-						show_modified_status = true,
-
-						mode = 0,
-
-						max_length = function()
-							return math.floor(vim.o.columns * 0.45)
-						end,
-
-						use_mode_colors = true,
-
+						"filename",
 						symbols = {
-							modified = " [✱]",
-							alternate_file = "#",
-							directory = "",
+							modified = " [Modified]",
+							readonly = " 󰌾",
+							unnamed = "[No Name]",
+							newfile = "[New]",
 						},
 					},
+					buffer_count,
 				},
 
 				lualine_c = {
-					--[[ {
+					{
 						"branch",
 						icon = "",
-					}, ]]
+					},
 
 					{
 						"diff",
 						symbols = {
-							added = "+",
-							modified = "✱",
-							removed = "-",
+							added = "󰐕 ",
+							modified = "󰏫 ",
+							removed = "󰍵 ",
 						},
 						colored = true,
 						cond = function()
@@ -125,6 +130,41 @@ return {
 					"location",
 				},
 			},
+
+			----------------------------------------------------------------
+			-- Tabline
+			----------------------------------------------------------------
+			--[[ tabline = {
+				lualine_a = {
+					{
+						"buffers",
+
+						show_filename_only = true,
+						hide_filename_extension = false,
+						show_modified_status = true,
+
+						mode = 0,
+
+						max_length = function()
+							return vim.o.columns
+						end,
+
+						use_mode_colors = true,
+
+						symbols = {
+							modified = " ●",
+							alternate_file = "#",
+							directory = "",
+						},
+					},
+				},
+
+				lualine_b = {},
+				lualine_c = {},
+				lualine_x = {},
+				lualine_y = {},
+				lualine_z = {},
+			}, ]]
 
 			extensions = {
 				"lazy",

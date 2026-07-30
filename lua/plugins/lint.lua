@@ -2,60 +2,81 @@
 return {
 	{
 		"mfussenegger/nvim-lint",
-		event = { "BufReadPost", "BufNewFile" },
-		dependencies = { "williamboman/mason.nvim" },
+
+		event = {
+			"BufReadPost",
+			"BufNewFile",
+		},
+
+		cmd = {
+			"Lint",
+		},
+
+		keys = {
+			{
+				"<leader>l",
+				function()
+					require("lint").try_lint()
+				end,
+				desc = "Lint Buffer",
+			},
+		},
+
 		config = function()
 			local lint = require("lint")
 
-			-- Setup linters by filetype
 			lint.linters_by_ft = {
 				lua = { "luacheck" },
-				bash = { "shellcheck" },
+
+				python = { "ruff" },
+
 				sh = { "shellcheck" },
+				bash = { "shellcheck" },
+
+				javascript = { "oxlint" },
+				typescript = { "oxlint" },
+
 				html = { "htmlhint" },
+
 				css = { "stylelint" },
+				scss = { "stylelint" },
+
 				json = { "jsonlint" },
+
 				markdown = { "markdownlint-cli2" },
+
+				yaml = { "yamllint" },
+
+				dockerfile = { "hadolint" },
+
+				terraform = { "tflint" },
+
+				nix = { "statix" },
+
+				go = { "golangcilint" },
+
+				rust = { " clippy" },
+
+				c = { "clangtidy" },
+				cpp = { "clangtidy" },
 			}
 
-			-- Global diagnostic config
-			vim.diagnostic.config({
-				virtual_text = true,
-				signs = true,
-				underline = true,
-				update_in_insert = true,
-				severity_sort = true,
-				float = {
-					border = "rounded",
-				},
+			local group = vim.api.nvim_create_augroup("NocturneLint", {
+				clear = true,
 			})
 
-			-- Faster CursorHold
-			vim.o.updatetime = 250
-
-			-- Float window on CursorHold
-			vim.api.nvim_create_autocmd("CursorHold", {
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = group,
 				callback = function()
-					vim.diagnostic.open_float(nil, { focus = false })
+					lint.try_lint()
 				end,
 			})
 
-			-- Clear diagnostics before linting to avoid duplicates
-			local function clear_and_lint()
-				vim.diagnostic.reset(nil, 0) -- Clear diagnostics for current buffer
-				lint.try_lint()
-			end
-
-			-- Trigger linting on save
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				group = vim.api.nvim_create_augroup("Linting", { clear = true }),
-				callback = clear_and_lint,
-			})
-
-			-- Manual lint command
 			vim.api.nvim_create_user_command("Lint", function()
 				lint.try_lint()
-			end, { desc = "Lint current buffer" })
+			end, {
+				desc = "Run configured linter(s)",
+			})
 		end,
 	},
 }

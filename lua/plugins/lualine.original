@@ -10,6 +10,7 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
+
 				theme = "catppuccin-nvim",
 				globalstatus = true,
 				icons_enabled = true,
@@ -21,18 +22,17 @@ return {
 				},
 
 				section_separators = {
+					-- left = "",
+					-- right = "",
 					left = "",
 					right = "",
 				},
 			},
 
-			----------------------------------------------------------------
-			-- Statusline
-			----------------------------------------------------------------
 			sections = {
-				------------------------------------------------------------
+				----------------------------------------------------------------
 				-- Left
-				------------------------------------------------------------
+				----------------------------------------------------------------
 				lualine_a = {
 					{
 						"mode",
@@ -42,40 +42,28 @@ return {
 
 				lualine_b = {
 					{
-						"buffers",
-
-						show_filename_only = true,
-						hide_filename_extension = false,
-						show_modified_status = true,
-
-						mode = 0,
-
-						max_length = function()
-							return math.floor(vim.o.columns * 0.45)
-						end,
-
-						use_mode_colors = true,
-
+						"filename",
 						symbols = {
-							modified = " [✱]",
-							alternate_file = "#",
-							directory = "",
+							modified = " [Modified]",
+							readonly = " 󰌾",
+							unnamed = "[No Name]",
+							newfile = "[New]",
 						},
 					},
 				},
 
 				lualine_c = {
-					--[[ {
+					{
 						"branch",
 						icon = "",
-					}, ]]
+					},
 
 					{
 						"diff",
 						symbols = {
-							added = "+",
-							modified = "✱",
-							removed = "-",
+							added = "󰐕 ",
+							modified = "󰏫 ",
+							removed = "󰍵 ",
 						},
 						colored = true,
 						cond = function()
@@ -85,21 +73,20 @@ return {
 
 					{
 						"diagnostics",
-						sources = { "nvim_diagnostic" },
-						update_in_insert = false,
-
 						symbols = {
 							error = " ",
 							warn = " ",
 							info = " ",
 							hint = " ",
 						},
+						sources = { "nvim_diagnostic" },
+						update_in_insert = false,
 					},
 				},
 
-				------------------------------------------------------------
+				----------------------------------------------------------------
 				-- Right
-				------------------------------------------------------------
+				----------------------------------------------------------------
 				lualine_x = {
 					function()
 						local clients = vim.lsp.get_clients({ bufnr = 0 })
@@ -118,7 +105,9 @@ return {
 				},
 
 				lualine_y = {
-					"progress",
+					{
+						"progress",
+					},
 				},
 
 				lualine_z = {
@@ -131,7 +120,6 @@ return {
 				"fzf",
 				"nvim-tree",
 				"mason",
-				"oil",
 			},
 		})
 	end,

@@ -1,95 +1,105 @@
--- ~/.config/nvim/lua/plugins/telescope.lua
 return {
-    {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",                -- Stable branch as of 2025
-        dependencies = {
-            { "nvim-lua/plenary.nvim" }, -- Required dependency
-            { "echasnovski/mini.nvim" }, -- Already in your setup, for icons
-            { "nvim-telescope/telescope-fzf-native.nvim",  build = "make", cond = vim.fn.executable("make") == 1 },
-            { "nvim-telescope/telescope-file-browser.nvim" },
-            -- { "debugloop/telescope-undo.nvim" },
+	{
+		"nvim-telescope/telescope.nvim",
 
-        },
-        config = function(_, opts)
-            local telescope = require("telescope")
-            telescope.load_extension("fzf")
-            telescope.load_extension("file_browser")
-            --   telescope.load_extension("undo")
-            require("telescope").setup({
-                defaults = {
-                    -- Basic config, customize as needed
-                    defaults = {
-                        prompt_prefix = "🔍 ",
-                        selection_caret = " ",
-                        path_display = { "smart" },
-                        layout_strategy = "horizontal",
-                        layout_config = {
-                            height = 0.9,
-                            width = 0.9,
-                        },
-                        file_ignore_patterns = { "node_modules", "%.git/", "dist" },
-                        sorting_strategy = "ascending",
-                        winblend = 10,
-                    },
-                    pickers = {
-                        find_files = { hidden = true },
-                        live_grep = { additional_args = { "--hidden" } },
-                        git_status = {
-                            -- Optional: Customize git_status picker
-                            previewer = require("telescope.previewers").git_file_diff.new({}),
-                        },
-                    },
-                    extensions = {
-                        fzf = {
-                            fuzzy = true,
-                            override_generic_sorter = true,
-                            override_file_sorter = true,
-                            case_mode = "smart_case",
-                        },
-                        -- undo = {
-                        --     -- Optional: Customize undo picker
-                        --     side_by_side = true, -- Show diff side-by-side
-                        --     layout_strategy = "vertical",
-                        --     layout_config = { preview_height = 0.8 },
-                        --     mappings = {
-                        --         i = {
-                        --             ["<CR>"] = function(prompt_bufnr)
-                        --                 print("Attempting to restore undo state...")
-                        --                 require("telescope-undo.actions").restore(prompt_bufnr)
-                        --                 print("Restore action called")
-                        --             end,
-                        --             ["r"] = function(prompt_bufnr)
-                        --                 print("Restoring with 'r' key...")
-                        --                 require("telescope-undo.actions").restore(prompt_bufnr)
-                        --             end,
-                        --         },
-                        --         n = {
-                        --             ["<CR>"] = function(prompt_bufnr)
-                        --                 print("Attempting to restore undo state...")
-                        --                 require("telescope-undo.actions").restore(prompt_bufnr)
-                        --                 print("Restore action called")
-                        --             end,
-                        --             ["r"] = function(prompt_bufnr)
-                        --                 print("Restoring with 'r' key...")
-                        --                 require("telescope-undo.actions").restore(prompt_bufnr)
-                        --             end,
-                        --         },
-                        --     },
-                        -- },
+		version = "*",
 
-                        ["file_browser"] = {
-                            hijack_netrw = true,
-                            hidden = true,
-                            respect_gitignore = false,
-                            grouped = true,
-                            initial_mode = "normal",
-                        },
-                    },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-tree/nvim-web-devicons",
 
-                    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }, -- Rounded borders
-                },
-            })
-        end,
-    },
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+				cond = vim.fn.executable("make") == 1,
+			},
+		},
+
+		config = function()
+			local telescope = require("telescope")
+
+			telescope.setup({
+				defaults = {
+					prompt_prefix = "  ",
+					selection_caret = "▎ ",
+					entry_prefix = "  ",
+					multi_icon = "󰄬 ",
+					sorting_strategy = "ascending",
+					layout_strategy = "horizontal",
+					path_display = { "smart" },
+					winblend = 0,
+
+					layout_config = {
+						horizontal = {
+							prompt_position = "top",
+							preview_width = 0.58,
+							results_width = 0.8,
+						},
+
+						vertical = {
+							mirror = false,
+						},
+
+						width = 0.90,
+						height = 0.90,
+
+						preview_cutoff = 120,
+					},
+
+					file_ignore_patterns = {
+						"^.git/",
+						"^node_modules/",
+						"^dist/",
+						"^build/",
+						"^target/",
+						"^.cache/",
+						"^.next/",
+						"^coverage/",
+					},
+				},
+
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
+
+					live_grep = {
+						additional_args = function()
+							return { "--hidden" }
+						end,
+					},
+
+					buffers = {
+						sort_mru = true,
+						ignore_current_buffer = true,
+					},
+
+					oldfiles = {
+						only_cwd = true,
+					},
+				},
+
+				extensions = {
+					fzf = {
+						fuzzy = true,
+						override_generic_sorter = true,
+						override_file_sorter = true,
+						case_mode = "smart_case",
+					},
+
+					file_browser = {
+						hijack_netrw = true,
+						hidden = true,
+						respect_gitignore = true,
+						grouped = true,
+						initial_mode = "normal",
+					},
+				},
+			})
+
+			telescope.load_extension("fzf")
+			telescope.load_extension("file_browser")
+		end,
+	},
 }

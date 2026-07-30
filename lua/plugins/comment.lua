@@ -3,60 +3,58 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		event = "VeryLazy",
-		config = function()
-			local comment = require("Comment")
 
-			comment.setup({
-				padding = true, -- Add padding to comments (e.g., ` -- comment` instead of `--comment`)
-				sticky = true, -- Keep cursor in place after commenting
-				ignore = "^$", -- Ignore empty lines when commenting
-				mappings = {
-					basic = true, -- Enable basic mappings (e.g., `gcc` for line comment)
-					extra = true, -- Enable extra mappings (e.g., `gco` for comment below)
-				},
-				toggler = {
-					line = "gcc", -- Default line-wise toggle (can override with custom)
-					block = "gbc", -- Default block-wise toggle
-				},
-				opleader = {
-					line = "gc", -- Operator-pending line-wise (e.g., `gc` in visual mode)
-					block = "gb", -- Operator-pending block-wise
-				},
+		opts = {
+			-- Add a space after the comment delimiter.
+			padding = true,
+
+			-- Keep cursor position after commenting.
+			sticky = true,
+
+			-- Ignore empty lines.
+			ignore = "^$",
+
+			mappings = {
+				basic = true,
+				extra = true,
+			},
+
+			toggler = {
+				line = "gcc",
+				block = "gbc",
+			},
+
+			opleader = {
+				line = "gc",
+				block = "gb",
+			},
+
+			-- Future:
+			-- pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+		},
+
+		config = function(_, opts)
+			require("Comment").setup(opts)
+
+			vim.keymap.set("n", "<leader>/", "gcc", {
+				remap = true,
+				desc = "Toggle line comment",
 			})
 
-			-- Normal mode: Toggle line-wise comment with <leader>/
-			vim.keymap.set("n", "<leader>/", function()
-				require("Comment.api").toggle.linewise.current()
-			end, { desc = "Toggle line comment" })
+			vim.keymap.set("n", "<leader>?", "gbc", {
+				remap = true,
+				desc = "Toggle block comment",
+			})
 
-			-- Visual mode: Toggle line-wise comment with <leader>/
-			vim.keymap.set("x", "<leader>/", function()
-				-- Escape visual mode and operate on the selected range
-				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "nx", false)
-				require("Comment.api").toggle.linewise(vim.fn.visualmode())
-			end, { desc = "Toggle line comment" })
+			vim.keymap.set("x", "<leader>/", "gc", {
+				remap = true,
+				desc = "Toggle line comment",
+			})
 
-			-- Normal mode: Toggle block-wise comment with <leader>?
-			vim.keymap.set("n", "<leader>?", function()
-				require("Comment.api").toggle.blockwise.current()
-			end, { desc = "Toggle block comment" })
-
-			-- Visual mode: Toggle block-wise comment with <leader>?
-			vim.keymap.set("x", "<leader>?", function()
-				-- Escape visual mode and operate on the selected range
-				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "nx", false)
-				require("Comment.api").toggle.blockwise(vim.fn.visualmode())
-			end, { desc = "Toggle block comment" })
-
-			-- Optional: Debugging to diagnose range issues
-			-- Uncomment to print the visual mode range when commenting
-			-- vim.keymap.set("x", "<leader>/", function()
-			--     local start_line = vim.fn.line("'<")
-			--     local end_line = vim.fn.line("'>")
-			--     print("Commenting lines: " .. start_line .. " to " .. end_line)
-			--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "nx", false)
-			--     require("Comment.api").toggle.linewise(vim.fn.visualmode())
-			-- end, { desc = "Toggle line comment (debug)" })
+			vim.keymap.set("x", "<leader>?", "gb", {
+				remap = true,
+				desc = "Toggle block comment",
+			})
 		end,
 	},
 }

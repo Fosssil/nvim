@@ -1,29 +1,45 @@
+-- ~/.config/nvim/lua/plugins/rainbow.lua
 return {
-    {
-        "HiPhish/rainbow-delimiters.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter" }, -- Ensure Tree-sitter is loaded
-        event = { "BufReadPost", "BufNewFile" },              -- Load when opening files
-        config = function()
-            -- Optional configuration (see Step 2)
-            require("rainbow-delimiters.setup").setup {
-                strategy = {
-                    [""] = "rainbow-delimiters.strategy.global", -- Default strategy for all filetypes
-                    vim = "rainbow-delimiters.strategy.local",   -- Use local strategy for HTML
-                },
-                query = {
-                    [""] = "rainbow-delimiters", -- Default query
-                    lua = "rainbow-blocks",      -- Use blocks for Lua
-                },
-                highlight = {
-                    "RainbowDelimiterRed",
-                    "RainbowDelimiterYellow",
-                    "RainbowDelimiterBlue",
-                    "RainbowDelimiterOrange",
-                    "RainbowDelimiterGreen",
-                    "RainbowDelimiterViolet",
-                    "RainbowDelimiterCyan",
-                },
-            }
-        end,
-    },
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+
+		event = {
+			"BufReadPost",
+			"BufNewFile",
+		},
+
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+
+		init = function()
+			---@type rainbow_delimiters.config
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = "rainbow-delimiters.strategy.global",
+					vim = "rainbow-delimiters.strategy.local",
+				},
+
+				query = {
+					[""] = "rainbow-delimiters",
+					lua = "rainbow-blocks",
+				},
+
+				priority = {
+					[""] = 110,
+					lua = 210,
+				},
+
+				highlight = {
+					"RainbowDelimiterRed",
+					"RainbowDelimiterYellow",
+					"RainbowDelimiterBlue",
+					"RainbowDelimiterOrange",
+					"RainbowDelimiterGreen",
+					"RainbowDelimiterViolet",
+					"RainbowDelimiterCyan",
+				},
+			}
+		end,
+	},
 }

@@ -38,7 +38,7 @@ key("v", "<Right>", disable_arrow_notification, "Disable Right Arrow") ]]
 
 -- Disable arrow keys in Normal, Insert and Visual modes
 for _, key in ipairs({ "<Up>", "<Down>", "<Left>", "<Right>" }) do
-	vim.keymap.set({ "n", "i", "v" }, key, "<Nop>", {
+	vim.keymap.set({ "n", "v" }, key, "<Nop>", {
 		silent = true,
 		desc = "Disable arrow key",
 	})

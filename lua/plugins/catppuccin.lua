@@ -25,16 +25,16 @@ return {
 		},
 		-- Text Styles
 
-		no_italic = true,
+		no_italic = false,
 		no_bold = false,
 		no_underline = false,
 
 		styles = {
-			comments = {},
-			conditionals = {},
-			loops = {},
+			comments = { "italic" },
+			conditionals = { "italic" },
+			loops = { "italic" },
+			keywords = { "italic" },
 			functions = {},
-			keywords = {},
 			strings = {},
 			variables = {},
 			numbers = {},
@@ -48,9 +48,9 @@ return {
 
 		lsp_styles = {
 			virtual_text = {
-				errors = {},
-				warnings = {},
-				hints = {},
+				errors = { "italic" },
+				hints = { "italic" },
+				warnings = { "italic" },
 				information = {},
 				ok = {},
 			},
@@ -68,29 +68,32 @@ return {
 			},
 		},
 
-		-- Nocturne Palette
-
-		color_overrides = {
-			mocha = {
-				-- Background
-
-				base = "#1A1B26",
-				mantle = "#16161E",
-				crust = "#13131A",
-
-				-- Accents
-
-				blue = "#8DB8FF",
-				teal = "#90D9E8",
-				sky = "#90D9E8",
-				yellow = "#D8C47A",
-			},
-		},
-
 		-- Highlight Overrides
 
 		custom_highlights = function(colors)
 			return {
+
+				Normal = {
+					bg = colors.mantle,
+				},
+
+				LineNr = {
+					fg = colors.overlay2,
+				},
+
+				CursorLineNr = {
+					fg = colors.peach,
+					bold = true,
+				},
+
+				LazyNormal = { bg = colors.base },
+				LazyBorder = { fg = colors.teal, bg = colors.surface1 },
+				LazyTitle = { fg = colors.green, bg = colors.mantle, bold = true },
+
+				----------------------------------------------------------------------
+				-- Blink Completion Menu
+				----------------------------------------------------------------------
+
 				BlinkCmpMenu = {
 					bg = colors.surface0,
 				},
@@ -102,7 +105,6 @@ return {
 
 				BlinkCmpMenuSelection = {
 					bg = colors.surface1,
-					bold = true,
 				},
 
 				BlinkCmpDoc = {
@@ -114,13 +116,155 @@ return {
 					fg = colors.overlay1,
 				},
 
-				LineNr = {
-					fg = colors.subtext0,
+				----------------------------------------------------------------------
+				-- Matched characters
+				----------------------------------------------------------------------
+
+				BlinkCmpLabelMatch = {
+					fg = colors.peach,
+					bold = true,
 				},
 
-				CursorLineNr = {
-					-- fg = colors.mauve,
-					fg = "#D6B8FA",
+				BlinkCmpLabelDescription = {
+					fg = colors.overlay1,
+					italic = true,
+				},
+
+				BlinkCmpSource = {
+					fg = colors.overlay0,
+					italic = true,
+				},
+
+				BlinkCmpGhostText = {
+					fg = colors.overlay0,
+					italic = true,
+				},
+
+				----------------------------------------------------------------------
+				-- Semantic completion kinds
+				----------------------------------------------------------------------
+
+				BlinkCmpKindText = {
+					fg = colors.subtext1,
+				},
+
+				BlinkCmpKindMethod = {
+					fg = colors.lavender,
+					bold = true,
+				},
+
+				BlinkCmpKindFunction = {
+					fg = colors.mauve,
+					bold = true,
+				},
+
+				BlinkCmpKindConstructor = {
+					fg = colors.flamingo,
+					bold = true,
+				},
+
+				BlinkCmpKindField = {
+					fg = colors.teal,
+					bold = true,
+				},
+
+				BlinkCmpKindVariable = {
+					fg = colors.blue,
+					bold = true,
+				},
+
+				BlinkCmpKindProperty = {
+					fg = colors.teal,
+					bold = true,
+				},
+
+				BlinkCmpKindClass = {
+					fg = colors.yellow,
+					bold = true,
+				},
+
+				BlinkCmpKindInterface = {
+					fg = colors.pink,
+					bold = true,
+				},
+
+				BlinkCmpKindStruct = {
+					fg = colors.yellow,
+					bold = true,
+				},
+
+				BlinkCmpKindModule = {
+					fg = colors.peach,
+					bold = true,
+				},
+
+				BlinkCmpKindUnit = {
+					fg = colors.sky,
+					bold = true,
+				},
+
+				BlinkCmpKindValue = {
+					fg = colors.green,
+					bold = true,
+				},
+
+				BlinkCmpKindEnum = {
+					fg = colors.rosewater,
+					bold = true,
+				},
+
+				BlinkCmpKindEnumMember = {
+					fg = colors.rosewater,
+					bold = true,
+				},
+
+				BlinkCmpKindKeyword = {
+					fg = colors.red,
+					bold = true,
+				},
+
+				BlinkCmpKindConstant = {
+					fg = colors.maroon,
+					bold = true,
+				},
+
+				BlinkCmpKindSnippet = {
+					fg = colors.green,
+					bold = true,
+				},
+
+				BlinkCmpKindFile = {
+					fg = colors.sky,
+					bold = true,
+				},
+
+				BlinkCmpKindFolder = {
+					fg = colors.peach,
+					bold = true,
+				},
+
+				BlinkCmpKindReference = {
+					fg = colors.sapphire,
+					bold = true,
+				},
+
+				BlinkCmpKindColor = {
+					fg = colors.flamingo,
+					bold = true,
+				},
+
+				BlinkCmpKindEvent = {
+					fg = colors.pink,
+					bold = true,
+				},
+
+				BlinkCmpKindOperator = {
+					fg = colors.red,
+					bold = true,
+				},
+
+				BlinkCmpKindTypeParameter = {
+					fg = colors.lavender,
 					bold = true,
 				},
 			}

@@ -1,7 +1,7 @@
 return {
 	{
 		"sphamba/smear-cursor.nvim",
-
+		enabled = false,
 		event = "VeryLazy",
 
 		opts = {
@@ -9,7 +9,8 @@ return {
 			-- General
 			------------------------------------------------------------------
 			smear_between_buffers = true,
-			smear_between_neighbor_lines = true,
+			-- smear_between_neighbor_lines = true,
+			smear_between_neighbor_lines = false,
 
 			min_horizontal_distance_smear = 0,
 			min_vertical_distance_smear = 0,
@@ -46,17 +47,18 @@ return {
 			delay_disable = nil,
 
 			delay_event_to_smear = 1,
-			delay_after_key = 4,
+			-- delay_after_key = 4,
+			delay_after_key = 2,
 
 			------------------------------------------------------------------
 			-- Motion Physics
 			------------------------------------------------------------------
-			stiffness = 0.72,
-			trailing_stiffness = 0.55,
+			stiffness = 0.68,
+			trailing_stiffness = 0.60,
 
-			anticipation = 0.16,
+			anticipation = 0.12,
 
-			damping = 0.94,
+			damping = 0.92,
 
 			trailing_exponent = 1.9,
 
@@ -77,7 +79,8 @@ return {
 			------------------------------------------------------------------
 			-- Rendering
 			------------------------------------------------------------------
-			max_length = 20,
+			-- max_length = 20,
+			max_length = 2,
 
 			color_levels = 16,
 			gamma = 2.2,

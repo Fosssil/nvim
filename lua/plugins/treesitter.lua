@@ -7,13 +7,31 @@ return {
 
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
+			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
 
 		config = function()
 			local ts = require("nvim-treesitter")
 
 			-- Initialize nvim-treesitter
-			ts.setup({})
+			ts.setup({
+				textobjects = {
+					select = {
+						lookahead = true,
+
+						include_surrounding_whitespace = false,
+
+						selection_modes = {
+							["@function.outer"] = "V",
+							["@class.outer"] = "V",
+						},
+					},
+
+					move = {
+						set_jumps = true,
+					},
+				},
+			})
 
 			-- Enable Treesitter for every supported buffer
 			vim.api.nvim_create_autocmd("FileType", {

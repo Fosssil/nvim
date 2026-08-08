@@ -1,3 +1,4 @@
+-- ~/.config/nvim/lua/plugins/hlchunk.lua
 local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local exclude_ft = {
@@ -22,13 +23,12 @@ return {
 			"BufReadPre",
 			"BufNewFile",
 		},
-
 		opts = {
 			chunk = {
 				enable = true,
 				priority = 15,
 				use_treesitter = true,
-				straight = true,
+				straight = false,
 				error_sign = true,
 				textobject = "ic",
 				max_file_size = 1024 * 1024,

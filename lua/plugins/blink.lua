@@ -11,8 +11,36 @@ return {
 		"yaocccc/blink-cmp-cmdlinehistory",
 		"mikavilpas/blink-ripgrep.nvim",
 		"xieyonn/blink-cmp-dat-word",
+		"xzbdmw/colorful-menu.nvim",
 	},
 	init = function()
+		config = function(_, opts)
+			require("colorful-menu").setup({
+				ls = {
+					lua_ls = {
+						arguments_hl = "@comment",
+					},
+
+					gopls = {
+						align_type_to_right = true,
+						preserve_type_when_truncate = true,
+					},
+
+					basedpyright = {
+						extra_info_hl = "@comment",
+					},
+
+					fallback = true,
+					fallback_extra_info_hl = "@comment",
+				},
+
+				fallback_highlight = "@variable",
+				max_width = 60,
+			})
+
+			require("blink.cmp").setup(opts)
+		end
+
 		vim.api.nvim_create_autocmd("CmdlineEnter", {
 			callback = function()
 				local t = vim.fn.getcmdtype()
@@ -80,7 +108,7 @@ return {
 				cmdline = {
 					min_keyword_length = function(ctx)
 						if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
-							return 3
+							return 2
 						end
 
 						return 0
@@ -167,7 +195,7 @@ return {
 		completion = {
 			documentation = {
 				auto_show = false,
-				auto_show_delay_ms = 150,
+				auto_show_delay_ms = 100,
 			},
 
 			ghost_text = {
@@ -206,8 +234,8 @@ return {
 					return { "s", "n" }
 				end,
 
-				min_width = 35,
-				max_height = 100,
+				min_width = 45,
+				max_height = 20,
 				scrolloff = 2,
 				scrollbar = true,
 
@@ -216,8 +244,16 @@ return {
 						label = {
 							width = {
 								fill = true,
-								max = 45,
+								max = 60,
 							},
+
+							text = function(ctx)
+								return require("colorful-menu").blink_components_text(ctx)
+							end,
+
+							highlight = function(ctx)
+								return require("colorful-menu").blink_components_highlight(ctx)
+							end,
 						},
 
 						kind = {
@@ -253,7 +289,6 @@ return {
 						{ "kind_icon" },
 						{
 							"label",
-							"label_description",
 							gap = 2,
 						},
 						{
@@ -281,10 +316,10 @@ return {
 			keymap = {
 				preset = "inherit",
 
-				["<CR>"] = {
+				--[[ ["<CR>"] = {
 					"accept_and_enter",
 					"fallback",
-				},
+				}, ]]
 			},
 
 			sources = function()

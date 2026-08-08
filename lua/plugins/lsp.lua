@@ -27,15 +27,6 @@ return {
 		},
 
 		opts = {
-			ensure_installed = {
-				"bashls",
-				"cssls",
-				"html",
-				"jsonls",
-				"lua_ls",
-				"marksman",
-			},
-
 			automatic_enable = true,
 		},
 	},

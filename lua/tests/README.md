@@ -1,1 +1,0 @@
-The purpose of this directory is to evaluate Nocturne's visual harmony, rhythm, readability, and consistency across languages. These files are intentionally crafted to expose every important syntax element and should evolve alongside the theme.

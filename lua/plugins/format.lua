@@ -96,7 +96,7 @@ return {
 				dockerfile = { "dockerfmt" },
 
 				terraform = { "terraform_fmt" },
-				heml = { "prettier" },
+				helm = { "prettier" },
 
 				nix = { "alejandra" },
 

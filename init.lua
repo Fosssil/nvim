@@ -1,3 +1,4 @@
+local catppuccin = require("plugins.catppuccin")
 -- Faster startup
 vim.loader.enable()
 vim.o.synmaxcol = 240
@@ -20,5 +21,4 @@ require("core.options")
 require("core.disable")
 require("core.diagnostics")
 
--- Load theme
--- require("theme").setup()
+vim.o.termguicolors = true

@@ -2,7 +2,7 @@
 return {
 	{
 		"folke/which-key.nvim",
-		enabled = false,
+		enabled = true,
 		dependencies = { "echasnovski/mini.nvim", version = false },
 		event = "VeryLazy",
 		opts = {

@@ -267,6 +267,59 @@ return {
 					fg = colors.lavender,
 					bold = true,
 				},
+
+				GrugFarHelpHeader = {
+					fg = colors.peach,
+					bold = true,
+				},
+
+				GrugFarHelpHeaderKey = {
+					fg = colors.mauve,
+					bold = true,
+				},
+
+				GrugFarInputLabel = {
+					fg = colors.blue,
+					bold = true,
+				},
+
+				GrugFarResultsMatch = {
+					fg = colors.peach,
+					bold = true,
+				},
+
+				GrugFarResultsChange = {
+					fg = colors.green,
+					bold = true,
+				},
+
+				HlSearchLens = {
+					fg = colors.base,
+					bg = colors.yellow,
+					bold = true,
+				},
+
+				HlSearchLensNear = {
+					fg = colors.base,
+					bg = colors.teal,
+					bold = true,
+				},
+
+				HlSearchNear = {
+					bg = colors.surface2,
+					underline = true,
+					bold = true,
+				},
+
+				Search = {
+					bg = colors.surface1,
+				},
+
+				CurSearch = {
+					fg = colors.base,
+					bg = colors.peach,
+					bold = true,
+				},
 			}
 		end,
 

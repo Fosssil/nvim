@@ -9,33 +9,16 @@ vim.diagnostic.config({
 	--------------------------------------------------------------------------
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.INFO] = " ",
-			[vim.diagnostic.severity.HINT] = "󰌵 ",
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
 		},
 	},
-
 	--------------------------------------------------------------------------
 	-- Virtual Text
 	--------------------------------------------------------------------------
-	virtual_text = {
-		current_line = true,
-
-		spacing = 2,
-
-		source = "if_many",
-
-		prefix = "● ",
-
-		suffix = "",
-
-		virt_text_pos = "eol",
-
-		format = function(diagnostic)
-			return diagnostic.message
-		end,
-	},
+	virtual_text = false,
 
 	--------------------------------------------------------------------------
 	-- Virtual Lines

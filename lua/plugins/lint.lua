@@ -55,7 +55,7 @@ return {
 
 				go = { "golangcilint" },
 
-				rust = { " clippy" },
+				rust = { "clippy" },
 
 				c = { "clangtidy" },
 				cpp = { "clangtidy" },

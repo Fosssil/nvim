@@ -57,7 +57,7 @@ return {
 						use_mode_colors = true,
 
 						symbols = {
-							modified = " ✱",
+							modified = " 󰎂",
 							alternate_file = "#",
 							directory = "",
 						},
@@ -119,7 +119,6 @@ return {
 			extensions = {
 				"lazy",
 				"fzf",
-				"nvim-tree",
 				"mason",
 				"oil",
 			},

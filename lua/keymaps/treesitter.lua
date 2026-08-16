@@ -1,6 +1,6 @@
-local select = require("nvim-treesitter-textobjects.select")
-local move = require("nvim-treesitter-textobjects.move")
-local repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
+-- local select = require("nvim-treesitter-textobjects.select")
+-- local move = require("nvim-treesitter-textobjects.move")
+-- local repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
 
 -- Selection
 for _, mode in ipairs({ "x", "o" }) do

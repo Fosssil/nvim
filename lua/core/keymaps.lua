@@ -13,6 +13,8 @@ local function key(mode, lhs, rhs, desc, extra)
 	map(mode, lhs, rhs, vim.tbl_extend("force", defaults, { desc = desc }, extra or {}))
 end
 
+require("keymaps")
+
 --------------------------------------------------
 -- Arrow Keys
 --------------------------------------------------
@@ -78,10 +80,10 @@ key("n", "N", "Nzz", "Previous Search Result")
 -- Buffers
 --------------------------------------------------
 
-key("n", "<leader>n", "<cmd>bnext<CR>", "Next Buffer")
+--[[ key("n", "<leader>n", "<cmd>bnext<CR>", "Next Buffer")
 key("n", "<leader>p", "<cmd>bprevious<CR>", "Previous Buffer")
 
-key("n", "<leader>bd", "<cmd>bp | bd #<CR>", "Close Buffer", { silent = false })
+key("n", "<leader>bd", "<cmd>bp | bd #<CR>", "Close Buffer", { silent = false }) ]]
 
 --------------------------------------------------
 -- Windows
@@ -118,31 +120,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local opts = { buffer = ev.buf }
 
 		-- Navigation
-		vim.keymap.set("n", "cd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "ck", vim.lsp.buf.hover, opts)
+		-- vim.keymap.set("n", "cd", vim.lsp.buf.definition, opts)
+		-- vim.keymap.set("n", "ck", vim.lsp.buf.hover, opts)
 
 		-- Actions
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+		-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
 		-- Diagnostics
 		vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
-		-- Formatting
-		vim.keymap.set(
-			"n",
-			"<leader>fd",
-			function()
-				require("conform").format({
-					async = true,
-					lsp_fallback = true,
-				})
-			end,
-			vim.tbl_extend("force", opts, {
-				desc = "Format Document",
-			})
-		)
+		-- -- Formatting
+		-- vim.keymap.set(
+		-- 	"n",
+		-- 	"<leader>fd",
+		-- 	function()
+		-- 		require("conform").format({
+		-- 			async = true,
+		-- 			lsp_fallback = true,
+		-- 		})
+		-- 	end,
+		-- 	vim.tbl_extend("force", opts, {
+		-- 		desc = "Format Document",
+		-- 	})
+		-- )
 	end,
 })

@@ -29,19 +29,6 @@ return {
 			"Format",
 		},
 
-		keys = {
-			{
-				"<leader>fd",
-				function()
-					require("conform").format({
-						async = true,
-						lsp_format = "fallback",
-					})
-				end,
-				desc = "Format Buffer",
-			},
-		},
-
 		init = function()
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,

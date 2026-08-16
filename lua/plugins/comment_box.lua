@@ -2,6 +2,14 @@
 return {
 	"LudoPinelli/comment-box.nvim",
 
+	cmd = {
+		"CBline",
+		"CBllline",
+		"CBllbox",
+		"CBcatalog",
+		"CBd",
+	},
+
 	opts = {
 		comment_style = "auto",
 

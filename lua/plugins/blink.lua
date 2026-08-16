@@ -58,8 +58,27 @@ return {
 	opts = {
 		keymap = {
 			-- We'll design this ourselves
-			preset = "default",
-			["<CR>"] = { "accept", "fallback" },
+			preset = "none",
+
+			["<Down>"] = {
+				"select_next",
+				"fallback",
+			},
+
+			["<Up>"] = {
+				"select_prev",
+				"fallback",
+			},
+
+			["<CR>"] = {
+				"accept",
+				"fallback",
+			},
+
+			["<Esc>"] = {
+				"cancel",
+				"fallback",
+			},
 		},
 
 		snippets = {

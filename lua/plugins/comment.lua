@@ -15,46 +15,12 @@ return {
 			ignore = "^$",
 
 			mappings = {
-				basic = true,
-				extra = true,
-			},
-
-			toggler = {
-				line = "gcc",
-				block = "gbc",
-			},
-
-			opleader = {
-				line = "gc",
-				block = "gb",
+				basic = false,
+				extra = false,
 			},
 
 			-- Future:
 			-- pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
-
-		config = function(_, opts)
-			require("Comment").setup(opts)
-
-			vim.keymap.set("n", "<leader>/", "gcc", {
-				remap = true,
-				desc = "Toggle line comment",
-			})
-
-			vim.keymap.set("n", "<leader>?", "gbc", {
-				remap = true,
-				desc = "Toggle block comment",
-			})
-
-			vim.keymap.set("x", "<leader>/", "gc", {
-				remap = true,
-				desc = "Toggle line comment",
-			})
-
-			vim.keymap.set("x", "<leader>?", "gb", {
-				remap = true,
-				desc = "Toggle block comment",
-			})
-		end,
 	},
 }

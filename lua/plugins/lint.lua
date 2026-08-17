@@ -12,16 +12,6 @@ return {
 			"Lint",
 		},
 
-		keys = {
-			{
-				"<leader>l",
-				function()
-					require("lint").try_lint()
-				end,
-				desc = "Lint Buffer",
-			},
-		},
-
 		config = function()
 			local lint = require("lint")
 

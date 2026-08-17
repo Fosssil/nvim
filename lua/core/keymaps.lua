@@ -33,6 +33,96 @@ key("n", "<leader>gh", "<cmd>Telescope git_file_history<CR>", "Git File History"
 -- Undo
 key("n", "<leader>u", "<cmd>Telescope undo<CR>", "Undo History")
 
+
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+-- Treesitter Textobjects
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+
+key({ "x", "o" }, "af", function()
+	require("nvim-treesitter-textobjects.select").select_textobject(
+		"@function.outer",
+		"textobjects"
+	)
+end, "Around Function")
+
+key({ "x", "o" }, "if", function()
+	require("nvim-treesitter-textobjects.select").select_textobject(
+		"@function.inner",
+		"textobjects"
+	)
+end, "Inside Function")
+
+key({ "x", "o" }, "ac", function()
+	require("nvim-treesitter-textobjects.select").select_textobject(
+		"@class.outer",
+		"textobjects"
+	)
+end, "Around Class")
+
+key({ "x", "o" }, "ic", function()
+	require("nvim-treesitter-textobjects.select").select_textobject(
+		"@class.inner",
+		"textobjects"
+	)
+end, "Inside Class")
+
+key({ "x", "o" }, "aa", function()
+	require("nvim-treesitter-textobjects.select").select_textobject(
+		"@parameter.outer",
+		"textobjects"
+	)
+end, "Around Parameter")
+
+key({ "x", "o" }, "ia", function()
+	require("nvim-treesitter-textobjects.select").select_textobject(
+		"@parameter.inner",
+		"textobjects"
+	)
+end, "Inside Parameter")
+
+
+-- Treesitter Movement
+key({ "n", "x", "o" }, "]m", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start(
+		"@function.outer",
+		"textobjects"
+	)
+end, "Next Function")
+
+key({ "n", "x", "o" }, "[m", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start(
+		"@function.outer",
+		"textobjects"
+	)
+end, "Previous Function")
+
+key({ "n", "x", "o" }, "]]", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start(
+		"@class.outer",
+		"textobjects"
+	)
+end, "Next Class")
+
+key({ "n", "x", "o" }, "[[", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start(
+		"@class.outer",
+		"textobjects"
+	)
+end, "Previous Class")
+
+
+-- Treesitter Movement Repeat
+key({ "n", "x", "o" }, ";", function()
+	require("nvim-treesitter-textobjects.repeatable_move").repeat_last_move_next()
+end, "Next Treesitter Object")
+
+key({ "n", "x", "o" }, ",", function()
+	require("nvim-treesitter-textobjects.repeatable_move").repeat_last_move_previous()
+end, "Previous Treesitter Object")
+
+
+
+
 --------------------------------------------------
 -- Arrow Keys
 --------------------------------------------------

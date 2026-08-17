@@ -3,4 +3,5 @@
 require("keymaps.buffers")
 require("keymaps.comments")
 require("keymaps.format")
+require("keymaps.hlsense")
 -- require("keymaps.treesitter")

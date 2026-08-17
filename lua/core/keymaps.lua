@@ -59,8 +59,6 @@ key("n", "<leader>q", "<cmd>q<CR>", "Quit")
 
 key("v", "p", '"_dP', "Paste Without Yanking")
 
-key("n", "<leader>h", "<cmd>nohlsearch<CR>", "Clear Search Highlight")
-
 key("n", "<A-j>", ":m .+1<CR>==", "Move Line Down")
 key("n", "<A-k>", ":m .-2<CR>==", "Move Line Up")
 
@@ -68,22 +66,6 @@ key("v", "<A-j>", ":m '>+1<CR>gv=gv", "Move Selected Lines Down")
 key("v", "<A-k>", ":m '<-2<CR>gv=gv", "Move Selected Lines Up")
 
 key({ "n", "v" }, "<leader>y", '"+y', "Yank To Clipboard")
-
---------------------------------------------------
--- Search
---------------------------------------------------
-
-key("n", "n", "nzz", "Next Search Result")
-key("n", "N", "Nzz", "Previous Search Result")
-
---------------------------------------------------
--- Buffers
---------------------------------------------------
-
---[[ key("n", "<leader>n", "<cmd>bnext<CR>", "Next Buffer")
-key("n", "<leader>p", "<cmd>bprevious<CR>", "Previous Buffer")
-
-key("n", "<leader>bd", "<cmd>bp | bd #<CR>", "Close Buffer", { silent = false }) ]]
 
 --------------------------------------------------
 -- Windows

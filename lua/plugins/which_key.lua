@@ -67,6 +67,10 @@ return {
 					"<leader>c",
 					group = "comments",
 				},
+				{
+					"<leader>f",
+					desc = "Format Buffer",
+				},
 			},
 		},
 	},

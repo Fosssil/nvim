@@ -2,7 +2,7 @@
 
 local map = vim.keymap.set
 
-map({ "n", "x" }, "<leader>f", function()
+map({ "n", "x" }, "<leader>fd", function()
 	local conform = require("conform")
 	local bufnr = vim.api.nvim_get_current_buf()
 

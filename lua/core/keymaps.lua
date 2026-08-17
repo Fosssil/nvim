@@ -15,6 +15,24 @@ end
 
 require("keymaps")
 
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+-- Telescope
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+
+key("n", "<leader>ff", "<cmd>Telescope find_files<CR>", "Find Files")
+key("n", "<leader>fe", "<cmd>Telescope file_browser<CR>", "File Browser")
+key("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", "Live Grep")
+key("n", "<leader>fb", "<cmd>Telescope buffers<CR>", "Buffers")
+key("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", "Help Tags")
+key("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", "Recent Files")
+
+-- Git / Telescope
+key("n", "<leader>gs", "<cmd>Telescope git_status<CR>", "Git Status")
+key("n", "<leader>gh", "<cmd>Telescope git_file_history<CR>", "Git File History")
+
+-- Undo
+key("n", "<leader>u", "<cmd>Telescope undo<CR>", "Undo History")
+
 --------------------------------------------------
 -- Arrow Keys
 --------------------------------------------------
@@ -72,17 +90,6 @@ key("n", "<C-l>", "<C-w>l", "Focus Right Window")
 
 key("n", "<leader>sv", "<cmd>vsplit<CR>", "Vertical Split")
 key("n", "<leader>sh", "<cmd>split<CR>", "Horizontal Split")
-
---------------------------------------------------
--- Telescope (Temporary)
--- Will move to telescope.lua later.
---------------------------------------------------
-
-key("n", "<leader>ff", "<cmd>Telescope file_browser<CR>", "File Browser")
-key("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", "Live Grep")
-key("n", "<leader>fb", "<cmd>Telescope buffers<CR>", "Buffers")
-key("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", "Help Tags")
-key("n", "<leader>gt", "<cmd>Telescope git_status<CR>", "Git Status")
 
 --------------------------------------------------
 -- LSP

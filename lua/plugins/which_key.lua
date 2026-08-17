@@ -65,15 +65,15 @@ return {
 				},
 				{
 					"<leader>c",
-					group = "comments",
+					group = "Comments",
 				},
 				{
 					"<leader>f",
-					desc = "Format Buffer",
+					desc = "Find / Format"
 				},
 				{
 					"<leader>m",
-					group = "multicursor"
+					group = "Multicursor"
 				},
 			},
 		},

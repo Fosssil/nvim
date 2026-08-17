@@ -12,14 +12,6 @@ return {
 		},
 	},
 
-	keys = {
-		{
-			"<leader>u",
-			"<cmd>Telescope undo<CR>",
-			desc = "Undo History",
-		},
-	},
-
 	opts = {
 		extensions = {
 			undo = {

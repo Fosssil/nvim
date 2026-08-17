@@ -1,10 +1,11 @@
 -- ~/.config/nvim/lua/plugins/in-and-out.lua
+
 return {
 	"ysmb-wtsg/in-and-out.nvim",
 
 	keys = {
 		{
-			"<A-l>",
+			"<C-CR>",
 			function()
 				require("in-and-out").in_and_out()
 			end,

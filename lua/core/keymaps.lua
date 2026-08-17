@@ -13,8 +13,6 @@ local function key(mode, lhs, rhs, desc, extra)
 	map(mode, lhs, rhs, vim.tbl_extend("force", defaults, { desc = desc }, extra or {}))
 end
 
-require("keymaps")
-
 -- ──────────────────────────────────────────────────────────────────────────────────────────
 -- Telescope
 -- ──────────────────────────────────────────────────────────────────────────────────────────
@@ -33,83 +31,50 @@ key("n", "<leader>gh", "<cmd>Telescope git_file_history<CR>", "Git File History"
 -- Undo
 key("n", "<leader>u", "<cmd>Telescope undo<CR>", "Undo History")
 
-
 -- ──────────────────────────────────────────────────────────────────────────────────────────
 -- Treesitter Textobjects
 -- ──────────────────────────────────────────────────────────────────────────────────────────
 
 key({ "x", "o" }, "af", function()
-	require("nvim-treesitter-textobjects.select").select_textobject(
-		"@function.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
 end, "Around Function")
 
 key({ "x", "o" }, "if", function()
-	require("nvim-treesitter-textobjects.select").select_textobject(
-		"@function.inner",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
 end, "Inside Function")
 
 key({ "x", "o" }, "ac", function()
-	require("nvim-treesitter-textobjects.select").select_textobject(
-		"@class.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
 end, "Around Class")
 
 key({ "x", "o" }, "ic", function()
-	require("nvim-treesitter-textobjects.select").select_textobject(
-		"@class.inner",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
 end, "Inside Class")
 
 key({ "x", "o" }, "aa", function()
-	require("nvim-treesitter-textobjects.select").select_textobject(
-		"@parameter.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")
 end, "Around Parameter")
 
 key({ "x", "o" }, "ia", function()
-	require("nvim-treesitter-textobjects.select").select_textobject(
-		"@parameter.inner",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")
 end, "Inside Parameter")
-
 
 -- Treesitter Movement
 key({ "n", "x", "o" }, "]m", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start(
-		"@function.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
 end, "Next Function")
 
 key({ "n", "x", "o" }, "[m", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start(
-		"@function.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
 end, "Previous Function")
 
 key({ "n", "x", "o" }, "]]", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start(
-		"@class.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
 end, "Next Class")
 
 key({ "n", "x", "o" }, "[[", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start(
-		"@class.outer",
-		"textobjects"
-	)
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
 end, "Previous Class")
-
 
 -- Treesitter Movement Repeat
 key({ "n", "x", "o" }, ";", function()
@@ -120,8 +85,63 @@ key({ "n", "x", "o" }, ",", function()
 	require("nvim-treesitter-textobjects.repeatable_move").repeat_last_move_previous()
 end, "Previous Treesitter Object")
 
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+-- Buffers
+-- ──────────────────────────────────────────────────────────────────────────────────────────
 
+key("n", "<leader>bn", "<cmd>bnext<CR>", "Next Buffer")
+key("n", "<leader>bp", "<cmd>bprevious<CR>", "Previous Buffer")
+key("n", "<leader>bd", "<cmd>Bdelete<CR>", "Delete Buffer")
 
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+-- Comments
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+
+-- Line comment
+key("n", "<leader>/", "gcc", "Comment Line", { remap = true })
+key("x", "<leader>/", "gc", "Comment Selection", { remap = true })
+
+-- Block comment
+key("n", "<leader>?", "gbc", "Block Comment Line", { remap = true })
+key("x", "<leader>?", "gb", "Block Comment Selection", { remap = true })
+
+-- Comment Box
+
+key({ "n", "x" }, "<leader>cb", "<cmd>CBllbox<CR>", "Comment Box")
+key("n", "<leader>cl", "<cmd>CBline<CR>", "Comment Line")
+key({ "n", "x" }, "<leader>ct", "<cmd>CBllline<CR>", "Comment Box with Title")
+
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+-- Formatting
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+
+key({ "n", "x" }, "<leader>fd", function()
+	local conform = require("conform")
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	local before = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+
+	conform.format({
+		bufnr = bufnr,
+		async = true,
+		lsp_format = "fallback",
+	}, function(err)
+		if err then
+			vim.notify("Formatting failed: " .. err, vim.log.levels.ERROR)
+			return
+		end
+
+		vim.schedule(function()
+			local after = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+
+			if vim.deep_equal(before, after) then
+				vim.notify("Nothing to format", vim.log.levels.INFO)
+			else
+				vim.notify("Formatted", vim.log.levels.INFO)
+			end
+		end)
+	end)
+end, "Format Buffer")
 
 --------------------------------------------------
 -- Arrow Keys

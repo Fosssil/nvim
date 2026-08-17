@@ -59,12 +59,6 @@ key("n", "<leader>q", "<cmd>q<CR>", "Quit")
 
 key("v", "p", '"_dP', "Paste Without Yanking")
 
-key("n", "<A-j>", ":m .+1<CR>==", "Move Line Down")
-key("n", "<A-k>", ":m .-2<CR>==", "Move Line Up")
-
-key("v", "<A-j>", ":m '>+1<CR>gv=gv", "Move Selected Lines Down")
-key("v", "<A-k>", ":m '<-2<CR>gv=gv", "Move Selected Lines Up")
-
 key({ "n", "v" }, "<leader>y", '"+y', "Yank To Clipboard")
 
 --------------------------------------------------

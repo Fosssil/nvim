@@ -71,6 +71,10 @@ return {
 					"<leader>f",
 					desc = "Format Buffer",
 				},
+				{
+					"<leader>m",
+					group = "move"
+				},
 			},
 		},
 	},

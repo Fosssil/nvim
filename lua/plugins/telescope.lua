@@ -7,7 +7,6 @@ return {
 
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-file-browser.nvim",
 			"nvim-tree/nvim-web-devicons",
 
 			{
@@ -15,6 +14,9 @@ return {
 				build = "make",
 				cond = vim.fn.executable("make") == 1,
 			},
+
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
 		},
 
 		config = function()
@@ -26,8 +28,10 @@ return {
 					selection_caret = "▎ ",
 					entry_prefix = "  ",
 					multi_icon = "󰄬 ",
+
 					sorting_strategy = "ascending",
 					layout_strategy = "horizontal",
+
 					path_display = { "smart" },
 					winblend = 0,
 
@@ -96,11 +100,16 @@ return {
 						grouped = true,
 						initial_mode = "normal",
 					},
+
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown(),
+					},
 				},
 			})
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
+			telescope.load_extension("ui-select")
 		end,
 	},
 }

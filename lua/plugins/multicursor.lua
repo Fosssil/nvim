@@ -1,63 +1,67 @@
 -- ~/.config/nvim/lua/plugins/multicursor.lua
+
 return {
 	"jake-stewart/multicursor.nvim",
 	branch = "1.0",
 
 	config = function()
 		local mc = require("multicursor-nvim")
-
 		mc.setup()
 
 		local map = vim.keymap.set
 
-		--------------------------------------------------------------------------
+		--------------------------------------------------
 		-- Cursor Creation
-		--------------------------------------------------------------------------
-
-		map({ "n", "x" }, "<Up>", function()
-			mc.lineAddCursor(-1)
-		end, { desc = "Multicursor: Add cursor above" })
-
-		map({ "n", "x" }, "<Down>", function()
-			mc.lineAddCursor(1)
-		end, { desc = "Multicursor: Add cursor below" })
-
-		map({ "n", "x" }, "<leader><Up>", function()
-			mc.lineSkipCursor(-1)
-		end, { desc = "Multicursor: Skip above" })
-
-		map({ "n", "x" }, "<leader><Down>", function()
-			mc.lineSkipCursor(1)
-		end, { desc = "Multicursor: Skip below" })
+		--------------------------------------------------
 
 		map({ "n", "x" }, "<leader>mn", function()
 			mc.matchAddCursor(1)
-		end, { desc = "Multicursor: Next occurrence" })
+		end, {
+			desc = "Next Match",
+		})
 
 		map({ "n", "x" }, "<leader>ms", function()
 			mc.matchSkipCursor(1)
-		end, { desc = "Multicursor: Skip occurrence" })
+		end, {
+			desc = "Skip Match",
+		})
 
 		map({ "n", "x" }, "<leader>mN", function()
 			mc.matchAllAddCursors()
-		end, { desc = "Multicursor: All occurrences" })
+		end, {
+			desc = "All Matches",
+		})
 
-		--------------------------------------------------------------------------
-		-- Mouse Support
-		--------------------------------------------------------------------------
+		map({ "n", "x" }, "<leader>m<Up>", function()
+			mc.lineAddCursor(-1)
+		end, {
+			desc = "Add Cursor Above",
+		})
+
+		map({ "n", "x" }, "<leader>m<Down>", function()
+			mc.lineAddCursor(1)
+		end, {
+			desc = "Add Cursor Below",
+		})
+
+		--------------------------------------------------
+		-- Mouse
+		--------------------------------------------------
 
 		map("n", "<C-LeftMouse>", mc.handleMouse)
 		map("n", "<C-LeftDrag>", mc.handleMouseDrag)
 		map("n", "<C-LeftRelease>", mc.handleMouseRelease)
 
-		--------------------------------------------------------------------------
-		-- Active Multicursor Layer
-		--------------------------------------------------------------------------
+		--------------------------------------------------
+		-- Multicursor Layer
+		--------------------------------------------------
 
 		mc.addKeymapLayer(function(layer)
+			-- Move between cursors
 			layer({ "n", "x" }, "<Left>", mc.prevCursor)
 			layer({ "n", "x" }, "<Right>", mc.nextCursor)
 
+			-- Exit multicursor mode
 			layer("n", "<Esc>", function()
 				if not mc.cursorsEnabled() then
 					mc.enableCursors()
@@ -67,9 +71,9 @@ return {
 			end)
 		end)
 
-		--------------------------------------------------------------------------
+		--------------------------------------------------
 		-- Highlights
-		--------------------------------------------------------------------------
+		--------------------------------------------------
 
 		local hl = vim.api.nvim_set_hl
 

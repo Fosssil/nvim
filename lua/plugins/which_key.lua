@@ -73,7 +73,7 @@ return {
 				},
 				{
 					"<leader>m",
-					group = "move"
+					group = "multicursor"
 				},
 			},
 		},

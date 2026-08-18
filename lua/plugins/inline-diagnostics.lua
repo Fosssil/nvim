@@ -10,7 +10,7 @@ return {
 		----------------------------------------------------------------------
 		-- Appearance
 		----------------------------------------------------------------------
-		preset = "modern",
+		preset = "powerline",
 
 		transparent_bg = false,
 		transparent_cursorline = true,

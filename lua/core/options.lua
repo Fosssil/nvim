@@ -21,22 +21,28 @@ opt.splitkeep = "screen"
 opt.smoothscroll = true
 opt.inccommand = "split" -- Previews substitutions
 opt.clipboard = "unnamedplus" -- System clipboard sync
-opt.scrolloff = 8 -- Keep content visible '8' lines below and above
+opt.scrolloff = 0 -- Keep content visible '0' lines below and above | Previous 8
 opt.undofile = true -- Persistent undo without swap clutter
 opt.swapfile = false -- Turn off swap file
 opt.signcolumn = "yes" -- vertical column to the left of the line numbers
 opt.confirm = true -- Confirm to save before exiting
 opt.completeopt = { "menu", "menuone", "noselect" } -- Completion menu behavior
 
+-- Folding
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldenable = false
+opt.foldlevel = 99
+
 -- Indentation
-opt.tabstop = 4 -- 2 spaces for tabs
-opt.softtabstop = 4
-opt.shiftwidth = 4 -- 2 spaces for indent width
-opt.expandtab = false -- Use spaces instead of tabs
+opt.tabstop = 4 -- Tabs occupy 4 columns
+opt.softtabstop = 4 -- Tab/Backspace uses 4 columns
+opt.shiftwidth = 4 -- Indentation width
+opt.expandtab = false -- Use tabs instead of spaces
 opt.autoindent = true -- Autoindent
-opt.smartindent = true -- Auto-indent new lines
+opt.smartindent = true -- Smart indentation
 opt.breakindent = true -- Wrap indent visually
-opt.shiftround = true -- Rounds indentations
+opt.shiftround = true -- Round indentation to shiftwidth
 
 -- Search
 opt.ignorecase = true -- Ignore case...
@@ -52,16 +58,9 @@ opt.splitright = true -- Vertical splits to the right
 -- Performance
 opt.updatetime = 250 -- Faster completion
 opt.timeoutlen = 300 -- Faster mapped sequences
-opt.lazyredraw = true -- Optimization for macros or fast edits
-
--- Don't continue comments when opening a new line with 'o' or 'O'.
-vim.api.nvim_create_autocmd("FileType", {
-	callback = function()
-		vim.opt_local.formatoptions:remove("o")
-	end,
-})
 
 -- Optional:
+-- opt.lazyredraw = true -- Optimization for macros or fast edits
 -- opt.colorcolumn = "80" -- enable for projects with strict line-length limits.
 -- opt.modeline = true -- Special comments in files that set buffer-local options
 -- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- Tabs, trailing spaces

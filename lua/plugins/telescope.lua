@@ -8,6 +8,8 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
 
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
@@ -15,8 +17,12 @@ return {
 				cond = vim.fn.executable("make") == 1,
 			},
 
-			"nvim-telescope/telescope-file-browser.nvim",
-			"nvim-telescope/telescope-ui-select.nvim",
+			{
+				"isak102/telescope-git-file-history.nvim",
+				dependencies = {
+					"tpope/vim-fugitive",
+				},
+			},
 		},
 
 		config = function()
@@ -86,6 +92,8 @@ return {
 				},
 
 				extensions = {
+					git_file_history = {},
+
 					fzf = {
 						fuzzy = true,
 						override_generic_sorter = true,
@@ -110,6 +118,7 @@ return {
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
 			telescope.load_extension("ui-select")
+			telescope.load_extension("git_file_history")
 		end,
 	},
 }

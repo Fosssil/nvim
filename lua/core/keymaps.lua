@@ -1,5 +1,10 @@
 -- ~/.config/nvim/lua/core/keymaps.lua
 
+-- ──────────────────────────────────────────────────────────────────────────────────────────
+-- Other plugin keymaps
+-- Blink
+-- mini.surround
+
 local map = vim.keymap.set
 
 -- Default options

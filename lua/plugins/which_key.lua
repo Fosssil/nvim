@@ -14,6 +14,11 @@ return {
 				rules = false,
 			},
 
+			triggers = {
+				{ "<auto>", mode = "nixsotc" },
+				{ "s", mode = "n" },
+			},
+
 			win = {
 				border = "rounded",
 				padding = { 1, 2 },
@@ -52,7 +57,7 @@ return {
 			disable = {
 				buftypes = {},
 				filetypes = {
-					"TelescopePrompt",
+					"telescopeprompt",
 					"lazy",
 					"mason",
 				},
@@ -61,19 +66,19 @@ return {
 			spec = {
 				{
 					"<leader>b",
-					group = "Buffers",
+					group = "buffers",
 				},
 				{
 					"<leader>c",
-					group = "Comments",
+					group = "comments",
 				},
 				{
 					"<leader>f",
-					desc = "Find / Format"
+					desc = "find / format",
 				},
 				{
 					"<leader>m",
-					group = "Multicursor"
+					group = "multicursor",
 				},
 			},
 		},

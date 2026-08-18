@@ -1,26 +1,34 @@
 -- ~/.config/nvim/lua/plugins/comment.lua
 return {
-	{
-		"numToStr/Comment.nvim",
-		event = "VeryLazy",
+	"celeste3z/celeste_comment.nvim",
+	lazy = false,
+	opts = {
+		keep_cursor = true,
+		keep_selection = "accurate",
+		insert_space = true,
+		ignore_empty_lines = "always",
+		fallback_to_block = "if_line_cms_wrapped",
 
-		opts = {
-			-- Add a space after the comment delimiter.
-			padding = true,
+		mappings = {
+			line_toggle = "<leader>/",
+			line_toggle_cur = "<leader>/",
+			line_toggle_visual = "<leader>/",
 
-			-- Keep cursor position after commenting.
-			sticky = true,
+			block_toggle = "<leader>?",
+			block_toggle_cur = "<leader>?",
+			block_toggle_visual = "<leader>?",
 
-			-- Ignore empty lines.
-			ignore = "^$",
+			line_textobject = "",
+			block_textobject = "",
+			auto_textobject = "",
+			uncomment_auto = "",
 
-			mappings = {
-				basic = false,
-				extra = false,
-			},
-
-			-- Future:
-			-- pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			line_add_below = "",
+			line_add_above = "",
+			line_add_eol = "",
+			line_invert = "",
+			line_force_add = "",
+			line_force_remove = "",
 		},
 	},
 }

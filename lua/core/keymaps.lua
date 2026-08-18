@@ -120,13 +120,28 @@ key({ "n", "v" }, "<leader>y", '"+y', "Yank To Clipboard")
 -- Windows
 --------------------------------------------------
 
+-- Navigation
 key("n", "<C-h>", "<C-w>h", "Focus Left Window")
 key("n", "<C-j>", "<C-w>j", "Focus Lower Window")
 key("n", "<C-k>", "<C-w>k", "Focus Upper Window")
 key("n", "<C-l>", "<C-w>l", "Focus Right Window")
 
+-- Creation
 key("n", "<leader>sv", "<cmd>vsplit<CR>", "Vertical Split")
 key("n", "<leader>sh", "<cmd>split<CR>", "Horizontal Split")
+
+-- Closing
+key("n", "<leader>wc", "<cmd>close<CR>", "Close Window")
+key("n", "<leader>wo", "<cmd>only<CR>", "Close Other Windows")
+
+-- Resize
+key("n", "<C-Up>", "<cmd>resize +2<CR>", "Increase Window Height")
+key("n", "<C-Down>", "<cmd>resize -2<CR>", "Decrease Window Height")
+key("n", "<C-Left>", "<cmd>vertical resize -2<CR>", "Decrease Window Width")
+key("n", "<C-Right>", "<cmd>vertical resize +2<CR>", "Increase Window Width")
+
+-- Equalize
+key("n", "<leader>we", "<C-w>=", "Equalize Windows")
 
 --------------------------------------------------
 -- LSP

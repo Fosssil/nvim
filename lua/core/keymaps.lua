@@ -1,9 +1,18 @@
 -- ~/.config/nvim/lua/core/keymaps.lua
 
--- ──────────────────────────────────────────────────────────────────────────────────────────
--- Other plugin keymaps
--- Blink
+--[[
+ -   ╭───────────────────────────────────────────────────────────────────╮
+ -   │ Other plugin keymaps                                              │
+ -   ╰───────────────────────────────────────────────────────────────────╯
+]]
 -- mini.surround
+-- Blink
+-- dial
+-- hlsense
+-- in_and_out
+-- mini.move
+-- multicursor
+-- spider
 
 local map = vim.keymap.set
 
@@ -17,6 +26,9 @@ local defaults = {
 local function key(mode, lhs, rhs, desc, extra)
 	map(mode, lhs, rhs, vim.tbl_extend("force", defaults, { desc = desc }, extra or {}))
 end
+
+-- ── Align ───────────────────────────────────────────────────────────────────────────────
+key("x", "<leader>a", "ga", "Align", { remap = true })
 
 -- ──────────────────────────────────────────────────────────────────────────────────────────
 -- Telescope

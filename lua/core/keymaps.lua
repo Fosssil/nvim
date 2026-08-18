@@ -22,10 +22,16 @@ local defaults = {
 -- Helper
 local function key(mode, lhs, rhs, desc, extra)
 	map(mode, lhs, rhs, vim.tbl_extend("force", defaults, { desc = desc }, extra or {}))
+
 end
 
 -- ── Align ───────────────────────────────────────────────────────────────────────────────
 key("x", "<leader>a", "ga", "Align", { remap = true })
+
+-- ── Empty line ──────────────────────────────────────────────────────────────────────────
+key("n", "[<Space>", "O<Esc>", "Add Empty Line Above")
+key("n", "]<Space>", "o<Esc>", "Add Empty Line Below")
+
 
 -- ──────────────────────────────────────────────────────────────────────────────────────────
 -- Telescope
@@ -142,6 +148,10 @@ key("n", "<C-Right>", "<cmd>vertical resize +2<CR>", "Increase Window Width")
 
 -- Equalize
 key("n", "<leader>we", "<C-w>=", "Equalize Windows")
+
+
+
+
 
 --------------------------------------------------
 -- LSP

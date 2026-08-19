@@ -4,6 +4,7 @@
 -- mini.surround
 -- Blink
 -- comment
+-- comment-box
 -- dial
 -- hlsense
 -- in_and_out
@@ -58,13 +59,6 @@ key("n", "<leader>u", "<cmd>Telescope undo<CR>", "Undo History")
 key("n", "<leader>bn", "<cmd>bnext<CR>", "Next Buffer")
 key("n", "<leader>bp", "<cmd>bprevious<CR>", "Previous Buffer")
 key("n", "<leader>bd", "<cmd>Bdelete<CR>", "Delete Buffer")
-
--- ──────────────────────────────────────────────────────────────────────────────────────────
--- Comment Box
--- ──────────────────────────────────────────────────────────────────────────────────────────
-
-key("n", "<leader>cl", "<cmd>CBline<CR>", "Comment Line")
-key({ "n", "x" }, "<leader>ct", "<cmd>CBllline<CR>", "Comment Box with Title")
 
 -- ──────────────────────────────────────────────────────────────────────────────────────────
 -- Formatting

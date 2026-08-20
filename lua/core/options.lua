@@ -49,7 +49,7 @@ opt.ignorecase = true -- Ignore case...
 opt.smartcase = true -- ...unless capital in search
 opt.hlsearch = true -- Highlight matches
 opt.incsearch = true -- Incremental search
-opt.wrapscan = false -- Search stop at file end
+opt.wrapscan = true -- Search stop at file end
 
 -- Split behavior
 opt.splitbelow = true -- Horizontal splits below
